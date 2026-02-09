@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Chocolate Day 🍫</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:linear-gradient(180deg,#3b1c0a,#7b3f19,#d2691e);
+  overflow-x:hidden;
+  color:white;
+}
+
+/* Falling chocolates */
+.chocolate{
+  position:fixed;
+  top:-50px;
+  font-size:28px;
+  animation:fall linear infinite;
+  opacity:0.8;
+  z-index:0;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(120vh) rotate(360deg);
+  }
+}
+
+/* Sections */
+section{
+  min-height:100vh;
+  padding:70px 20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+  z-index:2;
+}
+
+h1,h2{
+  font-family:'Pacifico',cursive;
+}
+
+h1{
+  font-size:3rem;
+}
+
+h2{
+  font-size:2.2rem;
+  margin-bottom:15px;
+}
+
+p{
+  max-width:600px;
+  font-size:1.05rem;
+  line-height:1.7;
+  color:#ffe6cc;
+}
+
+/* Typing text */
+.typing{
+  font-size:1.5rem;
+  margin-top:15px;
+  color:#ffd9b3;
+  min-height:2em;
+}
+
+/* Scroll arrow */
+.scroll-arrow{
+  position:absolute;
+  bottom:30px;
+  font-size:2.2rem;
+  animation:bounce 1.5s infinite;
+  cursor:pointer;
+  color:#fff;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(12px);}
+}
+
+/* Sweet blocks */
+.sweet{
+  background:rgba(255,255,255,0.12);
+  border-radius:20px;
+  padding:25px;
+  margin:15px 0;
+  width:100%;
+  max-width:500px;
+  backdrop-filter:blur(6px);
+}
+
+/* Footer */
+footer{
+  padding:30px;
+  text-align:center;
+  font-size:0.9rem;
+  opacity:0.8;
+}
+
+/* Mobile */
+@media(max-width:600px){
+  h1{font-size:2.3rem;}
+  h2{font-size:1.8rem;}
+  .typing{font-size:1.2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Background Music -->
+<audio autoplay loop>
+  <source src="music/chocolate.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🍫 Falling Chocolates -->
+<script>
+for(let i=0;i<30;i++){
+  let c=document.createElement("div");
+  c.className="chocolate";
+  c.innerHTML="🍫";
+  c.style.left=Math.random()*100+"vw";
+  c.style.animationDuration=(5+Math.random()*6)+"s";
+  c.style.fontSize=(18+Math.random()*20)+"px";
+  document.body.appendChild(c);
+}
+</script>
+
+<!-- SECTION 1 -->
+<section id="home">
+  <h1>Happy Chocolate Day 🍫</h1>
+
+  <!-- Typing Name -->
+  <div class="typing" id="typingText"></div>
+
+  <!-- Scroll Arrow -->
+  <div class="scroll-arrow" onclick="document.getElementById('msg').scrollIntoView()">
+    ⬇️
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section id="msg">
+  <h2>🍫 A Sweet Message</h2>
+  <div class="sweet">
+    <p>
+      Just like chocolate, you make my life sweeter, warmer,
+      and full of happiness. Every moment with you is special 💕
+    </p>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+  <h2>🍬 Why You Are Special</h2>
+  <div class="sweet">You are sweeter than chocolates 🍫</div>
+  <div class="sweet">You make my bad days better 🤎</div>
+  <div class="sweet">You are my favorite addiction 😘</div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+  <h2>🍰 From My Heart</h2>
+  <div class="sweet">
+    <p>
+      I may give you chocolates today,
+      but my heart has already been yours forever ❤️
+    </p>
+  </div>
+</section>
+
+<footer>
+  Made with ❤️ just for you
+</footer>
+
+<!-- ✨ Typing Animation Script -->
+<script>
+/* ✏️ CHANGE NAME HERE */
+const nameText = "For My Sweet Love ❤️";
+
+let i = 0;
+const speed = 100;
+const typingElement = document.getElementById("typingText");
+
+function typeText(){
+  if(i < nameText.length){
+    typingElement.innerHTML += nameText.charAt(i);
+    i++;
+    setTimeout(typeText, speed);
+  }
+}
+typeText();
+</script>
+
+</body>
+</html>
