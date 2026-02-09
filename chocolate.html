@@ -25,14 +25,15 @@ body{
   color:white;
 }
 
-/* Falling chocolates */
+/* 🍫 Falling chocolates */
 .chocolate{
   position:fixed;
   top:-50px;
   font-size:28px;
   animation:fall linear infinite;
-  opacity:0.8;
-  z-index:0;
+  opacity:0.85;
+  z-index:1;
+  pointer-events:none;
 }
 
 @keyframes fall{
@@ -89,7 +90,6 @@ p{
   font-size:2.2rem;
   animation:bounce 1.5s infinite;
   cursor:pointer;
-  color:#fff;
 }
 
 @keyframes bounce{
@@ -99,13 +99,28 @@ p{
 
 /* Sweet blocks */
 .sweet{
-  background:rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.15);
   border-radius:20px;
   padding:25px;
   margin:15px 0;
   width:100%;
   max-width:500px;
   backdrop-filter:blur(6px);
+}
+
+/* Music Button */
+.music-btn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  padding:10px 16px;
+  border:none;
+  border-radius:30px;
+  background:#ffb347;
+  color:#3b1c0a;
+  font-weight:600;
+  cursor:pointer;
+  z-index:5;
 }
 
 /* Footer */
@@ -127,15 +142,18 @@ footer{
 
 <body>
 
+<!-- 🎵 Music Button -->
+<button class="music-btn" onclick="playMusic()">🎵 Play Music</button>
+
 <!-- 🎵 Background Music -->
-<audio autoplay loop>
-  <source src="music/chocolate.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop>
+  <source src="./music/chocolate.mp3" type="audio/mpeg">
 </audio>
 
 <!-- 🍫 Falling Chocolates -->
 <script>
 for(let i=0;i<30;i++){
-  let c=document.createElement("div");
+  const c=document.createElement("div");
   c.className="chocolate";
   c.innerHTML="🍫";
   c.style.left=Math.random()*100+"vw";
@@ -148,12 +166,9 @@ for(let i=0;i<30;i++){
 <!-- SECTION 1 -->
 <section id="home">
   <h1>Happy Chocolate Day 🍫</h1>
-
-  <!-- Typing Name -->
   <div class="typing" id="typingText"></div>
 
-  <!-- Scroll Arrow -->
-  <div class="scroll-arrow" onclick="document.getElementById('msg').scrollIntoView()">
+  <div class="scroll-arrow" onclick="document.getElementById('msg').scrollIntoView({behavior:'smooth'})">
     ⬇️
   </div>
 </section>
@@ -164,7 +179,7 @@ for(let i=0;i<30;i++){
   <div class="sweet">
     <p>
       Just like chocolate, you make my life sweeter, warmer,
-      and full of happiness. Every moment with you is special 💕
+      and full of happiness 💕
     </p>
   </div>
 </section>
@@ -192,23 +207,27 @@ for(let i=0;i<30;i++){
   Made with ❤️ just for you
 </footer>
 
-<!-- ✨ Typing Animation Script -->
+<!-- ✨ Typing + Music Script -->
 <script>
-/* ✏️ CHANGE NAME HERE */
-const nameText = "For My Sweet Love ❤️";
-
-let i = 0;
-const speed = 100;
-const typingElement = document.getElementById("typingText");
-
-function typeText(){
-  if(i < nameText.length){
-    typingElement.innerHTML += nameText.charAt(i);
-    i++;
-    setTimeout(typeText, speed);
-  }
+function playMusic(){
+  document.getElementById("bgMusic").play();
 }
-typeText();
+
+/* ✏️ Change name text here */
+window.onload = function(){
+  const nameText = "For My Sweet Love ❤️";
+  let i = 0;
+  const typingElement = document.getElementById("typingText");
+
+  function typeText(){
+    if(i < nameText.length){
+      typingElement.innerHTML += nameText.charAt(i);
+      i++;
+      setTimeout(typeText, 100);
+    }
+  }
+  typeText();
+}
 </script>
 
 </body>
